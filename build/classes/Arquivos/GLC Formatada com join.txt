@@ -1,0 +1,50 @@
+select: SELECT type selectExpression
+      FROM tableName alias
+      JOIN tableName AS ID ON joinExpression
+      whereClausure
+      groupByClausure 
+      orderByClausure
+
+type: ALL | DISTINCT | λ
+
+selectExpression: * | projectItem projectItemAsterisco
+
+projectItem: aliasTable ID | MAX '(' aliasTable ID ')' | MIN '(' aliasTable ID ')' | AVG '(' aliasTable ID ')' | SUM '(' aliasTable ID ')' | COUNT '(' aliasTable ID ')'
+
+projectItemAsterisco : , projectItem projectItemAsterisco | λ
+
+whereClausure: WHERE booleanExpression other | λ
+
+booleanExpression: aliasTable ID operador comparador
+
+operador: = | > | >= | < | <= | <> | LIKE
+
+comparador: aliasTable ID | string | number
+
+other: and booleanExpression other | or booleanExpression other| λ
+
+groupByClausure: GROUP BY groupByExpression | λ
+
+groupByExpression: ID groupItemAsterisco 
+
+groupItemAsterisco: , groupByExpression | λ
+
+tableName: ID
+
+orderByClausure: ORDER BY orderByExpression | λ
+
+orderByExpression: aliasTable ID order orderItemAsterisco
+
+order: ASC | DESC | λ
+
+orderItemAsterisco: , orderByExpression | λ
+
+joinExpression: ID.ID = ID.ID
+
+aliasTable: ID. | λ
+
+alias: AS ID | λ
+
+
+
+
